@@ -5,11 +5,6 @@ from .entity import ChatResponse
 from .glm import ChatBot
 
 
-class SearchBot(ChatBot):
-    """AI搜索"""
-    assistant_id = "659e54b1b8006379b4b2abd6"
-
-
 class ImageBot(ChatBot):
     """
     AI画图
@@ -51,3 +46,9 @@ class ImageBot(ChatBot):
     ) -> Generator[ChatResponse, None, None] | ChatResponse:
         prompt = f"{prompt} style: {self.meta_data.get('cogview').get('style')}"
         return super().ask(prompt, conversation_id, timeout, stream, images)
+
+
+
+class SearchBot(ChatBot):
+    """AI搜索"""
+    assistant_id = "659e54b1b8006379b4b2abd6"
