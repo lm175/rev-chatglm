@@ -3,6 +3,7 @@
 
 
 ## 使用示例
+
     from revGLM import glm
 
     chatbot = glm.ChatBot(
@@ -16,6 +17,7 @@
 
 ## 识图对话
 可以将图片的bytes数据作为列表传入
+
     import requests
 
     image_1 = requests.get("https://avatars.githubusercontent.com/u/170833701").content
@@ -28,6 +30,7 @@
 ## 连续对话
 调用ask方法时可以传入`conversation_id`来继续之前的对话，若不传入该参数或传入空字符串则会创建新的对话
 ask方法(非流式)会返回一个对象，该对象中包含本次对话的`conversation_id`属性
+
     res = chatbot.ask("你好") # 创建一个新的对话
     print(res.content)
     conversation_id = res.conversation_id # 获取这次对话的id
@@ -38,5 +41,6 @@ ask方法(非流式)会返回一个对象，该对象中包含本次对话的`co
 
 
 ## 对话记录管理
+
     chatbot.get_conversations() # 获取所有对话记录
     chatbot.del_conversation(conversation_id) # 删除指定对话
