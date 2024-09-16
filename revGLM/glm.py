@@ -7,8 +7,18 @@ from .entity import ChatResponse
 class ChatBot:
 
     base_api = "https://chatglm.cn/chatglm"
-    assistant_id = "65940acff94777010aa6b796"
     refresh_token: str
+
+    assistant_id = "65940acff94777010aa6b796"
+    meta_data = {
+        "mention_conversation_id": "",
+        "is_test": False,
+        "input_question_type": "xxxx",
+        "channel": "",
+        "draft_id": "",
+        "quote_log_id": "",
+        "platform": "pc"
+    }
 
     def __init__(self, Cookie: str) -> None:
         spt = Cookie.split(";")
@@ -85,15 +95,7 @@ class ChatBot:
         data = {
             "assistant_id": self.assistant_id, # chatglm
             "conversation_id": conversation_id,
-            "meta_data": {
-                "mention_conversation_id": "",
-                "is_test": False,
-                "input_question_type": "xxxx",
-                "channel": "",
-                "draft_id": "",
-                "quote_log_id": "",
-                "platform": "pc"
-            },
+            "meta_data": self.meta_data,
             "messages": [
                 {
                     "role": "user",
@@ -239,3 +241,5 @@ class ChatBot:
         image_data = response.json().get('result')
         image_data['image_url'] = image_data.get('file_url')
         return image_data
+
+    
