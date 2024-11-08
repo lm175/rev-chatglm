@@ -165,7 +165,7 @@ class ChatBot:
             conversation_id (str, optional): 对话id. Defaults to "".
             timeout (int, optional): 超时时间. Defaults to 60.
             stream (bool, optional): 是否流式. Defaults to False.
-            images (bytes, optional): 图片二进制数据列表. Defaults to None.
+            images (list[bytes], optional): 图片二进制数据列表. Defaults to None.
         """
 
         if stream:

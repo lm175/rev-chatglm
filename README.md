@@ -1,5 +1,5 @@
 # rev-chatglm
-智谱清言(chatglm)逆向
+智谱清言(chatglm)逆向免费api
 
 
 ## 使用示例
