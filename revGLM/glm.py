@@ -204,7 +204,11 @@ class ChatBot:
             "assistant_id": self.assistant_id,
             "conversation_id": conversation_id
         }
-        resp = requests.post(f"{self.base_api}/backend-api/assistant/conversation/delete", data=data)
+        resp = requests.post(
+            f"{self.base_api}/backend-api/assistant/conversation/delete",
+            headers=self.headers,
+            json=data
+        )
         if resp.status_code == 200:
             return True
         else:
