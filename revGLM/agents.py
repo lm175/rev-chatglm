@@ -52,3 +52,11 @@ class ImageBot(ChatBot):
 class SearchBot(ChatBot):
     """AI搜索"""
     assistant_id = "659e54b1b8006379b4b2abd6"
+
+
+class ChatPlusBot(ChatBot):
+    """glm4plus"""
+    meta_data = {
+        "if_plus_model": True,
+        "plus_model_available": True
+    }
