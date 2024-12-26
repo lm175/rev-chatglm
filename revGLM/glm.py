@@ -108,7 +108,8 @@ class ChatBot:
         )
 
         if resp.status_code == 200:
-            for chunk in resp.iter_lines(decode_unicode=True):
+            for line in resp.iter_lines():
+                chunk = line.decode('utf-8')
                 if chunk:
                     chunk = str(chunk).strip()
                     if chunk == "event:message":

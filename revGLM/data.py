@@ -38,7 +38,7 @@ class Parts:
 
     def __post_init__(self):
         if isinstance(self.content, list) and all(isinstance(c, dict) for c in self.content):
-            self.content = [Content(**c) for c in self.content]
+            self.content = [Content(**c) for c in self.content] # type: ignore
 
 
 @dataclass
@@ -64,7 +64,7 @@ class ChatResponse:
 
     def __post_init__(self):
         if isinstance(self.parts, list) and all(isinstance(p, dict) for p in self.parts):
-            self.parts = [Parts(**p) for p in self.parts]
+            self.parts = [Parts(**p) for p in self.parts] # type: ignore
         
         if self.parts and self.parts[0].content:
             self.content = self.parts[0].content[0].text
