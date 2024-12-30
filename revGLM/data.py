@@ -10,6 +10,7 @@ class Content:
     image_url: str = ''
     tool_calls: List[Dict] = field(default_factory=lambda: [{}])
     content: str = ''
+    code: str = ''
 
     def __post_init__(self):
         if self.image:
