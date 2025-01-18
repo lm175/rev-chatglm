@@ -1,4 +1,4 @@
-import requests, json, time
+import requests, json, time, hashlib
 from typing import Union, Generator, Any
 from fake_useragent import UserAgent
 
@@ -36,11 +36,20 @@ class ChatBot:
         current_time = time.time()
         if not self._access_token or current_time > self._token_expiry:
             refresh_url = f"{self.base_api}/user-api/user/refresh"
+            md5_hash = hashlib.md5()
+            md5_hash.update((str(current_time)).encode())
             headers = {
-                'Content-Type': 'application/json',
-                'Authorization': f'Bearer {self.refresh_token}',
+                "Content-Type": "application/json;charset=utf-8",
+                "App-Name": "chatglm",
+                "Authorization": f"Bearer {self.refresh_token}",
+                "X-Device-Id": md5_hash.hexdigest(),
+                "X-App-Platform": "pc",
+                "X-App-Version": "0.0.1",
+                "X-Request-Id": "",
+                "X-Exp-Groups": "",
             }
             response = requests.post(refresh_url, headers=headers)
+            print(response.text)
             if response.status_code == 200:
                 self._access_token = f"Bearer {response.json().get('result').get('access_token')}"
                 self._token_expiry = current_time + 1800    # 间隔半小时以上时刷新验证令牌
