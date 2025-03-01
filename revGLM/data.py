@@ -2,21 +2,29 @@ from dataclasses import dataclass, field
 from typing import List, Dict
 
 
-@dataclass
 class Content:
-    type: str = 'text'
-    text: str = ''
-    image: List[Dict] = field(default_factory=lambda: [{}])
-    image_url: str = ''
-    tool_calls: List[Dict] = field(default_factory=lambda: [{}])
-    content: str = ''
-    code: str = ''
+    def __init__(
+            self,
+            type: str = 'text',
+            text: str = '',
+            image: List[Dict] = [{}],
+            tool_calls: List[Dict] = [{}],
+            content: str = '',
+            code: str = '',
+            third_distribute: str = '',
+            **kwargs
+    ):
+        self.type = type
+        self.text = text
+        self.image = image if image is not None else [{}]
+        self.image_url = self.image[0].get('image_url', '') if self.image else ''
+        self.tool_calls = tool_calls if tool_calls is not None else [{}]
+        self.content = content
+        self.code = code
+        self.third_distribute = third_distribute
 
-    def __post_init__(self, **kwargs):
         for key, value in kwargs.items():
             setattr(self, key, value)
-        if self.image:
-            self.image_url = self.image[0].get('image_url', '')
 
 
 class PartMetaData:
